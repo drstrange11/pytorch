@@ -634,6 +634,10 @@ TEST(CustomAutogradTest, HookNone) {
   ASSERT_TRUE(was_called);
 }
 
+// yf225 TODO: add tests for retain_grad() similar to Python tests!!! (test_autograd / test_nn / test_torch)
+// yf225 TODO: also see if we need to handle the JIT path: https://github.com/pytorch/pytorch/pull/26332/files
+
+
 // TODO add these tests if needed
 // test_once_differentiable
 // test_sparse_backward

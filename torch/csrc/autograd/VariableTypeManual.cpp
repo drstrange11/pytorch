@@ -152,6 +152,37 @@ Tensor& requires_grad_(Tensor& self, bool _requires_grad) {
   return self.set_requires_grad(_requires_grad);
 }
 
+/*
+def retain_grad(self):
+  r"""Enables .grad attribute for non-leaf Tensors."""
+  if not self.requires_grad:
+      raise RuntimeError("can't retain_grad on Tensor that has requires_grad=False")
+  if self.is_leaf:  # no-op for leaves
+      return
+  if hasattr(self, 'retains_grad'):
+      return
+  weak_self = weakref.ref(self)
+
+  def retain_grad_hook(grad):
+      var = weak_self()
+      if var is None:
+          return
+      if var._grad is None:
+          if grad.is_sparse:
+              var._grad = grad.clone()
+          else:
+              var._grad = grad.clone(memory_format=torch.contiguous_format)
+      else:
+          var._grad = var._grad + grad
+
+  self.register_hook(retain_grad_hook)
+  self.retains_grad = True
+*/
+// yf225 TODO: we might need to create a `retains_grad` field in AutogradMeta
+void retain_grad(Tensor& self) {
+
+}
+
 // We don't have an outplace copy, so this can't be generated automatically
 Tensor & copy_(Tensor & self, const Tensor & src, bool non_blocking) {
   jit::Value* output = nullptr;

@@ -90,6 +90,10 @@
   manual_kernel_registration: True
   variants: method
 
+- func: retain_grad(Tensor(a!) self) -> ()
+  manual_kernel_registration: True
+  variants: method
+
 - func: rename_(Tensor(a!) self, Dimname[]? names) -> Tensor(a!)
   variants: method
   supports_named_tensor: True
